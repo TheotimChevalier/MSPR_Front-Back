@@ -1,0 +1,8 @@
+{
+    "welcome": "Benvenuto sulla piattaforma",
+    "description": "Questa applicazione consente di monitorare gli indicatori sanitari.",
+    "language": "Lingua",
+    "select_country": "Seleziona un paese",
+    "login": "Accedi",
+    "logout": "Disconnettersi"
+}

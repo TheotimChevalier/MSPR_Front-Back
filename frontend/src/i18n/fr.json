@@ -1,0 +1,8 @@
+{
+    "welcome": "Bienvenue sur la plateforme",
+    "description": "Cette application permet de suivre les indicateurs de santé.",
+    "language": "Langue",
+    "select_country": "Sélectionnez un pays",
+    "login": "Se connecter",
+    "logout": "Se déconnecter"
+}

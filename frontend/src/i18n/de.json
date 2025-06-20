@@ -1,0 +1,8 @@
+{
+    "welcome": "Willkommen auf der Plattform",
+    "description": "Diese Anwendung ermöglicht die Verfolgung von Gesundheitsindikatoren.",
+    "language": "Sprache",
+    "select_country": "Wählen Sie ein Land",
+    "login": "Anmelden",
+    "logout": "Abmelden"
+}
