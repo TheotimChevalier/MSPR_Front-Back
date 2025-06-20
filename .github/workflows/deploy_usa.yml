@@ -1,0 +1,90 @@
+name: CI Dev Pipeline USA
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  setup:
+    name: Initial Setup
+    runs-on: ubuntu-latest
+    outputs:
+      python-version: ${{ steps.set-outputs.outputs.python-version }}
+      node-version: ${{ steps.set-outputs.outputs.node-version }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - id: set-outputs
+        run: |
+          echo "python-version=3.10" >> $GITHUB_OUTPUT
+          echo "node-version=18" >> $GITHUB_OUTPUT
+
+  backend:
+    name: Backend Pipeline
+    needs: setup
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ needs.setup.outputs.python-version }}
+
+      - name: Install backend dependencies
+        run: |
+          pip install -r backend/requirements.txt
+          pip install flake8
+
+      - name: Lint backend code
+        run: flake8 backend --exit-zero
+
+  frontend:
+    name: Frontend Pipeline
+    needs: setup
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ needs.setup.outputs.node-version }}
+
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          npm install
+
+      - name: Lint frontend code
+        run: |
+          cd frontend
+          npm run lint || true
+
+      - name: Build frontend
+        run: |
+          cd frontend
+          npm run build
+
+  deploy:
+    name: Deploy with Docker Compose
+    needs: [frontend, backend]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Docker Compose build
+        run: docker-compose -f docker-compose.yml build
+
+      - name: Docker Compose up (optional test)
+        run: docker-compose -f docker-compose.yml up -d
