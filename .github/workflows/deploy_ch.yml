@@ -45,7 +45,7 @@ jobs:
       - name: Lint backend code
         run: flake8 backend --exit-zero
 
-  frontend:
+    frontend:
     name: Frontend Pipeline
     needs: setup
     runs-on: ubuntu-latest
@@ -63,6 +63,11 @@ jobs:
         run: |
           cd frontend
           npm install
+
+      - name: Run frontend tests
+        run: |
+          cd frontend
+          npm run test 
 
       - name: Lint frontend code
         run: |
