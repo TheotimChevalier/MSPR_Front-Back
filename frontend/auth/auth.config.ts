@@ -1,15 +1,9 @@
-import { PassedInitialConfig } from 'angular-auth-oidc-client';
+import Keycloak from 'keycloak-js';
 
-export const authConfig: PassedInitialConfig = {
-  config: {
-    authority: 'http://localhost:8085/realms/paper',
-    redirectUrl: window.location.origin,
-    postLogoutRedirectUri: window.location.origin,
-    clientId: 'paper',
-    scope: 'openid profile',
-    responseType: 'code',
-    silentRenew: true,
-    silentRenewUrl: window.location.origin + '/silent-renew.html',
-    renewTimeBeforeTokenExpiresInSeconds: 10,
-  }
-}
+const keycloak = new Keycloak({
+    url: 'http://localhost:8085/', 
+    realm: 'Diabete',               
+    clientId: 'Diabete',             
+});
+
+export default keycloak;
