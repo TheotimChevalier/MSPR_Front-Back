@@ -1,4 +1,4 @@
-name: CI Dev Pipeline
+name: CI Dev Pipeline FR
 
 on:
   push:
