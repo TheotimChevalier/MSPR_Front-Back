@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Home from "./pages/Home";
 import RadarChartPage from "./pages/RadarChartPage";
 import './App.css';
-import keycloak from './auth/keycloak';
+import keycloak from 'frontend/src/Auth/keycloak.js';
 
 function App() {
   const [keycloakInitialized, setKeycloakInitialized] = useState(false);
