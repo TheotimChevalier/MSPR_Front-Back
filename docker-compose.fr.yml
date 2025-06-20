@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  backend:
+    environment:
+      - COUNTRY=fr
+      - DISABLE_TECH_API=true
+
+  frontend:
+    environment:
+      - COUNTRY=fr
+
+  nginx:
+    ports:
+      - "81:80"
